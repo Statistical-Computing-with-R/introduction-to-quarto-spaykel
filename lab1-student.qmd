@@ -1,10 +1,13 @@
 ---
 title: "Lab 1: Introduction to Quarto"
 author: "Sammy Paykel"
-date: "1/9/2025"
+date: "1/11/2025"
 format: 
   html:
     self-contained: true
+    code-fold: true
+    toc: true
+    theme: darkly
 editor: 
   source: true
 execute:
@@ -101,9 +104,9 @@ print(t_test_result)
 **Question 12 – Results Summary**
 
 1.  **Conclusion Based on p-value**:\
-    The p-value ((0.06063)) is greater than 0.05, so we fail to reject the null hypothesis ((H_0)). This indicates that there is insufficient evidence to suggest that the mean tooth lengths are significantly different between the OJ and VC supplement delivery methods.
+    The p-value 0.06063 is greater than 0.05, so we fail to reject the null hypothesis H_0. This indicates that there is insufficient evidence to suggest that the mean tooth lengths are significantly different between the OJ and VC supplement delivery methods.
 
 2.  **Interpretation of the Confidence Interval**:\
-    The 95% confidence interval for the difference in mean tooth lengths is (\[-0.171, 7.571\]). Since this interval includes 0, it suggests that the true difference in means could be zero. This supports the conclusion that there is no statistically significant difference between the groups.
+    The 95% confidence interval for the difference in mean tooth lengths is \[-0.171, 7.571\]. Since this interval includes 0, it suggests that the true difference in means could be zero. This supports the conclusion that there is no statistically significant difference between the groups.
 
 **Question 13 –** Create another section header for this section contents.
