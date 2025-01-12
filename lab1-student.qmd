@@ -2,21 +2,23 @@
 title: "Lab 1: Introduction to Quarto"
 author: "Sammy Paykel"
 date: "1/9/2025"
-format: html
-editor: source
-embed-resources: true
+format: 
+  html:
+    self-contained: true
+editor: 
+  source: true
 execute:
   echo: true
+  error: false
 ---
 
 # Part Two: Exploring Quarto Documents
 
 ## Specifying Global Execute Options
 
-Execution options specify how the R code in your Quarto document should be
-displayed. This [guide](https://quarto.org/docs/computations/execution-options.html) provides descriptions on the options you can specify in a document's execution.
+Execution options specify how the R code in your Quarto document should be displayed. This [guide](https://quarto.org/docs/computations/execution-options.html) provides descriptions on the options you can specify in a document's execution.
 
-**Question 1** -- Add your name and the date to the YAML. 
+**Question 1** -- Add your name and the date to the YAML.
 
 **Question 2** -- Add an `execute` line to your YAML that includes the following options, (1) your source code is always output on the page, and (2) your document will render even if there are errors.
 
@@ -34,12 +36,11 @@ data(ToothGrowth)
 summary(ToothGrowth)
 ```
 
-**Question 3** -- Let's spice this code up a bit. Delete `1 + 1` from the code chunk and paste in the code provided in the Lab 1 instructions. 
+**Question 3** -- Let's spice this code up a bit. Delete `1 + 1` from the code chunk and paste in the code provided in the Lab 1 instructions.
 
 ### Check the Data Documentation
 
-**Question 4** -- In your **console** (*not* in the Quarto document), type
-`?ToothGrowth` (or alternatively `help(ToothGrowth)`.Use the information that pops up in the *Help* pane in RStudio to fill in the blanks below. 
+**Question 4** -- In your **console** (*not* in the Quarto document), type `?ToothGrowth` (or alternatively `help(ToothGrowth)`.Use the information that pops up in the *Help* pane in RStudio to fill in the blanks below.
 
 *This dataset investigates the effect of Vitamin C on tooth growth in Guinea Pigs*
 
@@ -60,13 +61,13 @@ summary(ToothGrowth)
 #| echo: true
 #| label: centered-captioned-plots
 
-# First plot: Boxplot of supplement vs. tooth length
+library(tidyverse)
+
 ggplot(data = ToothGrowth, 
        mapping = aes(x = supp, y = len)) +
   geom_boxplot() +
   labs(x = "Supplement", y = "Length of Teeth (mm)")
 
-# Second plot: Boxplot of dose vs. tooth length
 ToothGrowth %>% 
   mutate(dose = as.factor(dose)) %>% 
   ggplot(mapping = aes(x = dose, y = len)) +
@@ -75,22 +76,34 @@ ToothGrowth %>%
 
 ```
 
-Now, run this code chunk! You should see two side-by-side boxplots, one plot
-comparing tooth length between the two supplement delivery methods and one plot
-comparing tooth length between the three different dosages uses. 
+Now, run this code chunk! You should see two side-by-side boxplots, one plot comparing tooth length between the two supplement delivery methods and one plot comparing tooth length between the three different dosages uses.
 
-**Question 7** -- Read over the [Quarto documentation on figure options](https://quarto.org/docs/authoring/figures.html#computations)
-and add an option (`#|`) to the above code chunk to make the figures print
-side-by-side (i.e., in one row) in the rendered HTML file. 
+**Question 7** -- Read over the [Quarto documentation on figure options](https://quarto.org/docs/authoring/figures.html#computations) and add an option (`#|`) to the above code chunk to make the figures print side-by-side (i.e., in one row) in the rendered HTML file.
 
-**Question 8** -- Specify in the code chunk options that these boxplots 
-should be **center aligned**.
+**Question 8** -- Specify in the code chunk options that these boxplots should be **center aligned**.
 
-**Question 9** -- Specify a **figure caption** for the boxplots (using a
-code-chunk option).
+**Question 9** -- Specify a **figure caption** for the boxplots (using a code-chunk option).
+
+### ToothGrowth T Test
+
+**Question 10** -- Using the t.test() function, write code to carry out the analysis of the t test described in the lab instructions.
 
 ```{r}
+data("ToothGrowth")
 
+t_test_result <- t.test(len ~ supp, data = ToothGrowth, var.equal = FALSE)
+
+print(t_test_result)
 ```
 
+**Question 11 --** Run the code
 
+**Question 12 – Results Summary**
+
+1.  **Conclusion Based on p-value**:\
+    The p-value ((0.06063)) is greater than 0.05, so we fail to reject the null hypothesis ((H_0)). This indicates that there is insufficient evidence to suggest that the mean tooth lengths are significantly different between the OJ and VC supplement delivery methods.
+
+2.  **Interpretation of the Confidence Interval**:\
+    The 95% confidence interval for the difference in mean tooth lengths is (\[-0.171, 7.571\]). Since this interval includes 0, it suggests that the true difference in means could be zero. This supports the conclusion that there is no statistically significant difference between the groups.
+
+**Question 13 –** Create another section header for this section contents.
